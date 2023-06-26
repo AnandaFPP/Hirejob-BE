@@ -15,18 +15,13 @@ CREATE TABLE category (
     PRIMARY KEY(id)
 );
 
-CREATE TABLE products (
-    id INT,
-    store_id INT,
-    category_id INT,
-    name VARCHAR(255) NOT NULL,
+CREATE TABLE product(
+    id VARCHAR(),
+    name VARCHAR NOT NULL,
+    stock INT NOT NULL,
     price INT NOT NULL,
-    stock INT,
-    image VARCHAR(255),
-    created_at TIMESTAMP NOT NULL,
-    PRIMARY KEY(id),
-    FOREIGN KEY(category_id) REFERENCES category(id),
-    FOREIGN KEY(store_id) REFERENCES store(id)
+    photo VARCHAR NOT NULL,
+    description VARCHAR NOT NULL
 );
 
 CREATE TABLE store (

@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const usersController = require("../controller/users");
+const {protect} = require('../middleware/auth')
 
 router
-  .get("/", usersController.getAllUsers)
-  .get("/:id", usersController.getDetailUsers)
-  .post("/", usersController.createUsers)
-  .put("/:id", usersController.updateUsers)
-  .delete("/:id", usersController.deleteUsers);
+
+  .post("/register", usersController.registerUser)
+  .post("/login", usersController.loginUser)
+  .get("/profile", protect, usersController.profileUser)
+  .post("/refreshToken", usersController.refreshToken)
 
 module.exports = router;

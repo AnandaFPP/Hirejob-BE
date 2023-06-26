@@ -1,33 +1,14 @@
 const Pool = require('../config/db')
 
 
-const selectAllUsers = ({limit,offset,sort,sortby}) => {
-  return Pool.query(`SELECT * FROM users ORDER BY ${sortby} ${sort} LIMIT ${limit} OFFSET ${offset}`)
-}
-const selectUsers = (id) => {
-  return Pool.query(`SELECT * FROM users WHERE id = ${id}`)
-}
-const insertUsers = (data) => {
-  const {id, email, username, password} = data
-  const date = new Date().toISOString()
-  return Pool.query(`INSERT INTO users(id, email, username, password, created_at) VALUES(${id}, '${email}', '${username}', '${password}', '${date}')`)
-}
-const updateUsers = (data) => {
-  const { id, email, username, password} = data
-  const date = new Date().toISOString()
-  return Pool.query(`UPDATE users SET email = '${email}', username = '${username}', password = '${password}', created_at = '${date}' WHERE id = ${id}`)
-}
-const deleteUsers = (id) => {
-  return Pool.query(`DELETE FROM users WHERE id = ${id}`)
+const createUser = (data) => {
+  const {id, fullname, email, passwordHash, role} = data
+  return Pool.query(`INSERT INTO users(id, fullname, email, password, role) VALUES('${id}', '${fullname}', '${email}', '${passwordHash}', '${role}')`)
 }
 
-const countData = () =>{
-  return Pool.query('SELECT COUNT(*) FROM users')
-}
-
-const findIdUsers =(id)=>{
+const findEmail =(email)=>{
   return  new Promise ((resolve,reject)=> 
-  Pool.query(`SELECT id FROM users WHERE id = ${id}`,(err,res)=>{
+  Pool.query(`SELECT * FROM users WHERE email = '${email}'`,(err,res)=>{
     if(!err){
       resolve(res)
     }else{
@@ -38,11 +19,6 @@ const findIdUsers =(id)=>{
 }
 
 module.exports = {
-  selectAllUsers,
-  selectUsers,
-  insertUsers,
-  updateUsers,
-  deleteUsers,
-  countData,
-  findIdUsers
+  createUser,
+  findEmail
 }

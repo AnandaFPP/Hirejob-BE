@@ -2,20 +2,18 @@ const Pool = require('../config/db')
 
 
 const selectAllProduct = ({limit,offset,sort,sortby}) => {
-  return Pool.query(`SELECT products.id, products.name AS product_name, category.name AS category_name, store.name AS store_name, products.price, products.stock, store.phone AS store_contact FROM products INNER JOIN category ON products.id = category.id INNER JOIN store ON products.id = store.id ORDER BY ${sortby} ${sort} LIMIT ${limit} OFFSET ${offset}`)
+  return Pool.query(`SELECT * FROM products ORDER BY ${sortby} ${sort} LIMIT ${limit} OFFSET ${offset}`)
 }
 const selectProduct = (id) => {
-  return Pool.query(`SELECT products.id, products.name AS product_name, category.name AS category_name, store.name AS store_name, products.price, products.stock, store.phone AS store_contact FROM products INNER JOIN category ON products.id = category.id INNER JOIN store ON products.id = store.id WHERE products.id = ${id}`)
+  return Pool.query(`SELECT * FROM products WHERE id = ${id}`)
 }
 const insertProduct = (data) => {
-  const {id, store_id, category_id, name, price, stock, image} = data
-  const date = new Date().toISOString()
-  return Pool.query(`INSERT INTO products(id, store_id, category_id, name, price, stock, image, created_at) VALUES(${id}, ${store_id}, ${category_id}, '${name}', ${price}, ${stock}, '${image}', '${date}')`)
+  const { id,name,stock,price,photo,description } = data
+  return Pool.query(`INSERT INTO products(id, name, stock, price, photo, description) VALUES(${id}, '${name}', ${stock}, ${price}, '${photo}', '${description}')`)
 }
 const updateProduct = (data) => {
-  const { id, store_id, category_id, name, price, stock, image} = data
-  const date = new Date().toISOString()
-  return Pool.query(`UPDATE products SET store_id = ${store_id}, category_id = ${category_id},name = '${name}', price = ${price}, stock = ${stock}, image = '${image}', created_at = '${date}' WHERE id = '${id}'`)
+  const { id, name, stock, price, photo, description } = data
+  return Pool.query(`UPDATE products SET name = '${name}', stock = ${stock}, price = ${price} , photo = '${photo}' , description = '${description}' WHERE id = '${id}'`)
 }
 const deleteProduct = (id) => {
   return Pool.query(`DELETE FROM products WHERE id = ${id}`)
@@ -38,7 +36,7 @@ const findIdProduct =(id)=>{
 }
 
 const searchProduct = ({keywords}) => {
-    return Pool.query(`SELECT products.id, products.name, category.name AS category_name, store.name AS store_name, products.price, products.stock, store.phone AS store_contact FROM products INNER JOIN category ON products.id = category.id INNER JOIN store ON products.id = store.id WHERE products.name ILIKE '%${keywords}%'`)
+    return Pool.query(`SELECT * FROM products WHERE name ILIKE '%${keywords}%'`)
   }
 
 
