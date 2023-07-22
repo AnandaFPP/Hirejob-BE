@@ -5,7 +5,7 @@ const selectAllProduct = ({limit,offset,sort,sortby}) => {
   return Pool.query(`SELECT * FROM products ORDER BY ${sortby} ${sort} LIMIT ${limit} OFFSET ${offset}`)
 }
 const selectProduct = (id) => {
-  return Pool.query(`SELECT * FROM products WHERE id = ${id}`)
+  return Pool.query(`SELECT * FROM products WHERE id = '${id}'`)
 }
 const insertProduct = (data) => {
   const { id,name,stock,price,photo,description } = data

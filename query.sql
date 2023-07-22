@@ -7,6 +7,15 @@ CREATE TABLE users (
     PRIMARY KEY(id)
 );
 
+CREATE TABLE seller (
+    id INT,
+    email VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    PRIMARY KEY(id)
+);
+
 CREATE TABLE category (
     id INT,
     name VARCHAR(255) NOT NULL,

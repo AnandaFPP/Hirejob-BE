@@ -11,9 +11,7 @@ const port = 8000
 
 app.use(express.json());
 app.use(morgan('dev'))
-app.use(cors({
-    origin: ['https://www.section.io', 'https://www.google.com/']
-}))
+app.use(cors())
 app.use(helmet());
 app.use(xss())
 app.use('/', mainRouter);

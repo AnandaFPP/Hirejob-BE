@@ -8,16 +8,16 @@ const {
   findIdProduct,
   searchProduct,
 } = require("../models/products");
-const client = require('../config/redis')
+// const client = require('../config/redis')
 
 const commonHelper = require("../helper/common");
 
 let productController = {
   getAllProduct: async (req, res) => {
     try {
-      const role = req.payload.role;
+      // const role = req.payload.role;
       const page = Number(req.query.page) || 1;
-      const limit = Number(req.query.limit) || 5;
+      const limit = Number(req.query.limit) || 10;
       const offset = (page - 1) * limit;
       const sortby = req.query.sortby || "id";
       const sort = req.query.sort || "ASC";
@@ -60,7 +60,7 @@ let productController = {
     selectProduct(id)
     .then(
       result => {
-      client.setEx(`products/${id}`,60*60,JSON.stringify(result.rows))
+      // client.setEx(`products/${id}`,60*60,JSON.stringify(result.rows))
       commonHelper.response(res, result.rows, 200, "get data success from database")
       }
     )

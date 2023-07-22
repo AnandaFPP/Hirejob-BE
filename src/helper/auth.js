@@ -18,8 +18,5 @@ const refreshToken = (payload) => {
   return token;
 };
 
-const validationRole = (payload) => {
-  
-};
 
 module.exports = { generateToken, refreshToken };
