@@ -1,58 +1,47 @@
-CREATE TABLE users (
-    id INT,
-    email VARCHAR(255) NOT NULL,
-    username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP NOT NULL,
-    PRIMARY KEY(id)
+CREATE TABLE workers (
+    worker_id VARCHAR(255) NOT NULL,
+    worker_name VARCHAR(255) NOT NULL,
+    worker_email VARCHAR(255) NOT NULL,
+    worker_phone VARCHAR(255) NOT NULL,
+    worker_photo VARCHAR(255),
+    worker_pass VARCHAR(420) NOT NULL,
+    worker_confirm_pass VARCHAR(420) NOT NULL,
+    province VARCHAR(255),
+    city VARCHAR(255),
+    last_work VARCHAR,
+    description VARCHAR(420)
+    PRIMARY KEY(worker_id)
 );
-
-CREATE TABLE seller (
-    id INT,
-    email VARCHAR(255) NOT NULL,
-    username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP NOT NULL,
-    PRIMARY KEY(id)
+CREATE TABLE worker_detail (
+    id INT NOT NULL,
+    worker_id VARCHAR(255) NOT NULL,
+    province VARCHAR(255),
+    province_id VARCHAR(255),
+    city TIMESTAMP NOT NULL,
+    city_id VARCHAR(255),
+    last_work VARCHAR,
+    description VARCHAR(420)
 );
-
-CREATE TABLE category (
-    id INT,
-    name VARCHAR(255) NOT NULL,
-    image VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP NOT NULL,
-    PRIMARY KEY(id)
+CREATE TABLE skill (
+    skill_id INT,
+    worker_id VARCHAR(255) NOT NULL,
+    skill_name VARCHAR(255) NOT NULL,
+    PRIMARY KEY(skill_id)
 );
-
-CREATE TABLE product(
-    id VARCHAR(),
-    name VARCHAR NOT NULL,
-    stock INT NOT NULL,
-    price INT NOT NULL,
-    photo VARCHAR NOT NULL,
-    description VARCHAR NOT NULL
+CREATE TABLE experience (
+    experience_id INT PRIMARY KEY,
+    worker_id VARCHAR REFERENCES workers(worker_id),
+    position VARCHAR(255),
+    company_name VARCHAR(255),
+    working_start DATE,
+    working_end DATE,
+    description TEXT,
+    created_at TIMESTAMP
 );
-
-CREATE TABLE store (
-    id INT,
-    name VARCHAR(255) NOT NULL,
-    location VARCHAR(255) NOT NULL,
-    phone VARCHAR(255),
-    created_at TIMESTAMP NOT NULL,
-    PRIMARY KEY(id)
+CREATE TABLE portofolio (
+    porto_id INT PRIMARY KEY,
+    worker_id VARCHAR NOT NULL REFERENCES workers(worker_id),
+    porto_name VARCHAR(255),
+    link_repo VARCHAR(420),
+    porto_photo VARCHAR(516),
 );
-
-INSERT INTO users(id, email, username, password, created_at, updated_at) VALUES(1, 'anandafpp14@gmail.com', 'anandafpp', '12345678', CURRENT_TIMESTAMP, LOCALTIMESTAMP);
-
-INSERT INTO category(id, name, image, created_at, updated_at) VALUES(1, 'Clothes', 'Clothes.jpg', CURRENT_TIMESTAMP, LOCALTIMESTAMP);
-('Pants', 'Pants.jpg', CURRENT_TIMESTAMP, LOCALTIMESTAMP),
-('Clothes', 'Clothes.jpg', CURRENT_TIMESTAMP, LOCALTIMESTAMP),
-
-INSERT INTO products(id, store_id, category_id, name, price, stock, image, created_at, updated_at) 
-VALUES(1, 1, 1, 'Seringai x Raisa T-shirt', 220000, 10, 'SeringaixRaisa.jpg', CURRENT_TIMESTAMP, LOCALTIMESTAMP);
-
-UPDATE category SET id = 1 WHERE name = 'Clothes';
-
-INSERT INTO store(id, name, location, phone, created_at) VALUES(1, 'Lawless Store', 'Jakarta Selatan', '085912349989', CURRENT_TIMESTAMP);
-
-SELECT products.id, products.name AS product_name, category.name AS category_name, store.name AS store_name, products.price, products.stock, store.phone AS store_contact FROM products INNER JOIN category ON products.id = category.id INNER JOIN store ON products.id = store.id;
