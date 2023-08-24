@@ -1,3 +1,5 @@
+-- TABLE DATABASE --
+
 CREATE TABLE workers (
     worker_id VARCHAR(255) NOT NULL,
     worker_name VARCHAR(255) NOT NULL,
