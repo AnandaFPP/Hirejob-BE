@@ -11,23 +11,34 @@ CREATE TABLE workers (
     province VARCHAR(255),
     city VARCHAR(255),
     last_work VARCHAR,
-    description VARCHAR(420)
+    description VARCHAR(420),
+    updated_on timestamp default CURRENT_TIMESTAMP not null,
     PRIMARY KEY(worker_id)
 );
-CREATE TABLE worker_detail (
-    id INT NOT NULL,
-    worker_id VARCHAR(255) NOT NULL,
-    province VARCHAR(255),
-    province_id VARCHAR(255),
-    city TIMESTAMP NOT NULL,
-    city_id VARCHAR(255),
-    last_work VARCHAR,
-    description VARCHAR(420)
+
+CREATE TABLE recruiter(
+    recruiter_id VARCHAR NOT NULL PRIMARY KEY,
+    recruiter_compname VARCHAR(255),
+    recruiter_jobfield VARCHAR(255),
+    recruiter_province VARCHAR(255),
+    recruiter_city VARCHAR(255),
+    recruiter_desc TEXT,
+    recruiter_emailcomp VARCHAR(255),
+    recruiter_phone VARCHAR(255),
+    recruiter_linkedin VARCHAR(255),
+    recruiter_name VARCHAR(255),
+    recruiter_email VARCHAR(255),
+    recruiter_position VARCHAR(255),
+    recruiter_password VARCHAR(255),
+    recruiter_confirmpassword VARCHAR(255),
+    recruiter_photo VARCHAR(255),
+    updated_on timestamp default CURRENT_TIMESTAMP not null,
 );
+
 CREATE TABLE skill (
     skill_id INT,
-    worker_id VARCHAR(255) NOT NULL,
-    skill_name VARCHAR(255) NOT NULL,
+    worker_id VARCHAR(255),
+    skill_name VARCHAR(255),
     PRIMARY KEY(skill_id)
 );
 CREATE TABLE experience (
@@ -47,3 +58,70 @@ CREATE TABLE portofolio (
     link_repo VARCHAR(420),
     porto_photo VARCHAR(516),
 );
+
+CREATE TABLE hire (
+    hire_id VARCHAR PRIMARY KEY,
+    hire_title TEXT,
+    hire_desc TEXT,
+    worker_id VARCHAR,
+    recruiter_id VARCHAR,
+    worker_name VARCHAR,
+    worker_email VARCHAR,
+    recruiter_compname VARCHAR
+);
+
+create table workers_verification
+(
+    id text not null ,
+    worker_id text ,
+    token text ,
+    created_on timestamp default CURRENT_TIMESTAMP not null	,
+    constraint 	workers foreign key(worker_id) 	references 	workers(worker_id) ON DELETE CASCADE,
+    primary key (id)
+)
+
+CREATE FUNCTION update_updated_on_worker()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_on = now
+();
+RETURN NEW;
+END;
+$$ language 'plpgsql';
+
+CREATE TRIGGER update_worker_updated_on
+    BEFORE
+UPDATE
+    ON
+        workers
+    FOR EACH ROW
+EXECUTE PROCEDURE update_updated_on_worker
+();
+
+create table recruiter_verification
+(
+    id text not null ,
+    recruiter_id text ,
+    token text ,
+    created_on timestamp default CURRENT_TIMESTAMP not null	,
+    constraint 	recruiter foreign key(recruiter_id) 	references 	recruiter(recruiter_id) ON DELETE CASCADE,
+    primary key (id)
+)
+
+CREATE FUNCTION update_updated_on_recruiter()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_on = now
+();
+RETURN NEW;
+END;
+$$ language 'plpgsql';
+
+CREATE TRIGGER update_recruiter_updated_on
+    BEFORE
+UPDATE
+    ON
+        recruiter
+    FOR EACH ROW
+EXECUTE PROCEDURE update_updated_on_recruiter
+();
