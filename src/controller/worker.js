@@ -298,6 +298,6 @@ let workerController = {
       commonHelper.response(res, null, 500, 'Error deleting worker');
     }
   },
-};
+}; 
 
 module.exports = workerController;
