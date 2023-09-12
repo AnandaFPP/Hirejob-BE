@@ -106,4 +106,4 @@ API endpoint list are also available as published postman documentation
 
 :rocket: [`Demo Hiring App`](https://hire-job-fe-lyart.vercel.app/)
 
-Project link : [https://github.com/AnandaFPP/HireJob-BE](https://github.com/AnandaFPP/Hirejob-BE)
+Project link : [https://github.com/AnandaFPP/HireJob-BE](https://github.com/AnandaFPP/Hirejob-BE) 
