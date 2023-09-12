@@ -309,7 +309,7 @@ let recruiterController = {
     const payload = {
       recruiter_email: users.recruiter_email,
     };
-    users.token_user = authHelper.generateToken(payload);
+    users.token = authHelper.generateToken(payload);
     users.refreshToken = authHelper.refreshToken(payload);
     commonHelper.response(res, users, 201, "Login Successfuly");
   },
