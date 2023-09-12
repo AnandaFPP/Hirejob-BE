@@ -3,7 +3,7 @@ const Pool = require('../config/db')
 
 const selectAllWorker = ({ limit, offset, sort, sortby }) => {
   return Pool.query(
-    `SELECT workers.*, array_agg(skills.skill_name) as skills FROM workers LEFT JOIN skills ON workers.worker_id = skills.worker_id GROUP BY workers.worker_id ORDER BY ${sortby} ${sort} LIMIT ${limit} OFFSET ${offset}`
+    `SELECT workers.*, array_agg(skills.skill_name) as skills FROM workers LEFT JOIN skills ON workers.worker_id = skills.worker_id GROUP BY workers.worker_id ORDER BY ${sortby} ${sort} LIMIT ${limit} OFFSET ${offset}` 
   );
 };
 
