@@ -321,7 +321,7 @@ let recruiterController = {
       users_email: decoded.users_email,
     };
     const result = {
-      token_user: authHelper.generateToken(payload),
+      token: authHelper.generateToken(payload),
       refreshToken: authHelper.refreshToken(payload),
     };
     commonHelper.response(res, result, 200);
