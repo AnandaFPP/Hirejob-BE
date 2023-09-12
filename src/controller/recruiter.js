@@ -85,7 +85,6 @@ let recruiterController = {
     const checkEmail = await findEmail(recruiter_email);
     try {
       if (checkEmail.rowCount == 1) throw "Email already used";
-      // delete checkEmail.rows[0].password;
     } catch (error) {
       delete checkEmail.rows[0].password;
       return commonHelper.response(res, null, 403, error);
@@ -93,11 +92,7 @@ let recruiterController = {
 
     const passwordHash = bcrypt.hashSync(recruiter_confirmpassword);
     const recruiter_id = uuidv4();
-    // let users_photo = null;
-    // if (req.file) {
-    //   const result = await cloudinary.uploader.upload(req.file.path);
-    //   users_photo = result.secure_url;
-    // }
+    
     const schema = Joi.object().keys({
       recruiter_name: Joi.required(),
       recruiter_email: Joi.string().required(),
@@ -106,7 +101,6 @@ let recruiterController = {
       recruiter_position: Joi.any(),
       recruiter_password: Joi.string().min(3).max(15).required(),
       recruiter_confirmpassword: Joi.ref("recruiter_password"),
-      // users_photo: Joi.string().allow(""),
     });
 
     const { error, value } = schema.validate(req.body, {
