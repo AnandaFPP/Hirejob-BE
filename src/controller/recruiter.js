@@ -115,7 +115,7 @@ let recruiterController = {
     const verify = "false";
     const recruiter_verification_id = uuidv4().toLocaleLowerCase();
     const token = crypto.randomBytes(64).toString("hex");
-    const url = `${process.env.BASE_URL}recruiter/verify?id=${recruiter_id}&token=${token}`;
+    const url = `https://hirejob-be-ashy.vercel.app/recruiter/verify?id=${recruiter_id}&token=${token}`;
 
     await sendEmailRecruiter(recruiter_compname, recruiter_email, "Verify Email", url);
 
