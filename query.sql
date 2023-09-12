@@ -35,14 +35,14 @@ CREATE TABLE recruiter(
     updated_on timestamp default CURRENT_TIMESTAMP not null,
 );
 
-CREATE TABLE skill (
-    skill_id INT,
+CREATE TABLE skills (
+    skill_id VARCHAR,
     worker_id VARCHAR(255),
     skill_name VARCHAR(255),
     PRIMARY KEY(skill_id)
 );
 CREATE TABLE experience (
-    experience_id INT PRIMARY KEY,
+    experience_id VARCHAR PRIMARY KEY,
     worker_id VARCHAR REFERENCES workers(worker_id),
     position VARCHAR(255),
     company_name VARCHAR(255),
@@ -52,7 +52,7 @@ CREATE TABLE experience (
     created_at TIMESTAMP
 );
 CREATE TABLE portofolio (
-    porto_id INT PRIMARY KEY,
+    porto_id VARCHAR PRIMARY KEY,
     worker_id VARCHAR NOT NULL REFERENCES workers(worker_id),
     porto_name VARCHAR(255),
     link_repo VARCHAR(420),

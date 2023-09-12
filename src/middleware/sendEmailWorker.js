@@ -38,7 +38,6 @@ module.exports = async (worker_name, worker_email, subject, url) => {
         <p><a href="https://blanja-be-alpha.vercel.app/" style="color: #007BFF; text-decoration: none;">https://blanja-be-alpha.vercel.app/</a></p>
       </div>
     </div>
-    
 `,
     });
     // console.log("email sent successfully");

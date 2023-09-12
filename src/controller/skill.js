@@ -1,4 +1,5 @@
-const { selectAllSkills, selectSkill, insertSkill, updateSkill, deleteSkill, countSkillData, findSkill, selectSkillWorker, findSkillById } = require('../models/skill')
+const { selectAllSkills, selectSkill, insertSkill, updateSkill, deleteSkill, countSkillData, findSkill, selectSkillWorker, findSkillById, findUser } = require('../models/skill')
+const { v4: uuidv4 } = require("uuid");
 const commonHelper = require("../helper/common");
 
 let skillController = {
@@ -52,11 +53,8 @@ let skillController = {
       if (SkillName) {
         return res.json({ message: "Skill already added" });
       }
-      const {
-        rows: [count],
-      } = await countSkillData();
 
-      const skill_id = Number(count.count) + 1;
+      const skill_id = uuidv4();
 
       const data = {
         skill_id,
@@ -70,7 +68,7 @@ let skillController = {
         .catch((err) => res.send(err));
     },
     updateSkill: async (req, res) => {
-      let skill_id = Number(req.params.id);
+      let skill_id = String(req.params.id);
       let { skill_name } = req.body;
       const { rowCount } = await findSkillById(skill_id);
       if (!rowCount) {
@@ -80,7 +78,7 @@ let skillController = {
         skill_id,
         skill_name,
       };
-      console.log(data)
+
       updateSkill(data)
         .then((result) => {
           commonHelper.response(res, result.rows, 200, "Skill updated");
@@ -90,7 +88,7 @@ let skillController = {
         });
     },
     deleteSkill: async (req, res) => {
-      let skill_id = Number(req.params.id);
+      let skill_id = String(req.params.id);
       const { rowCount } = await findSkillById(skill_id);
       if (!rowCount) {
         return res.json({ message: "ID is not found" });

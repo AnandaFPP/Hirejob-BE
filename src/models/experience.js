@@ -7,7 +7,7 @@ const selectAllExperience = ({ limit, offset, sort, sortby }) => {
 };
 
 const selectExperience = (experience_id) => {
-    return Pool.query(`SELECT * FROM experience  WHERE experience_id = ${experience_id}`);
+    return Pool.query(`SELECT * FROM experience  WHERE experience_id = '${experience_id}'`);
 };
 
 const selectExperienceWorker = (worker_id) => {
@@ -15,7 +15,7 @@ const selectExperienceWorker = (worker_id) => {
 };
 
 const deleteExperience = (experience_id) => {
-    return Pool.query(`DELETE FROM experience WHERE experience_id  = ${experience_id}`);
+    return Pool.query(`DELETE FROM experience WHERE experience_id  = '${experience_id}'`);
 };
 
 const insertExperience = (data) => {
@@ -67,7 +67,7 @@ const updateExperience = (data) => {
         description,
     } = data;
     return Pool.query(
-        `UPDATE experience SET position = '${position}', company_name = '${company_name}', working_start = '${working_start}', working_end = '${working_end}', description = '${description}' WHERE experience_id = ${experience_id}`
+        `UPDATE experience SET position = '${position}', company_name = '${company_name}', working_start = '${working_start}', working_end = '${working_end}', description = '${description}' WHERE experience_id = '${experience_id}'`
     );
 };
 

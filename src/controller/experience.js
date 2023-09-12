@@ -1,5 +1,6 @@
 const { selectAllExperience, selectExperience, insertExperience, updateExperience, deleteExperience, countExperience, findWorker, selectExperienceWorker, findExperienceById } = require('../models/experience')
 const commonHelper = require("../helper/common");
+const { v4: uuidv4 } = require("uuid");
 
 let experienceController = {
     getAllExperience: async (req, res) => {
@@ -53,12 +54,8 @@ let experienceController = {
         working_start,
         working_end,
         description } = req.body;
-      
-      const {
-        rows: [count],
-      } = await countExperience();
 
-      const experience_id = Number(count.count) + 1;
+      const experience_id = uuidv4();
 
       const data = {
         experience_id,
@@ -77,7 +74,7 @@ let experienceController = {
         .catch((err) => res.send(err));
     },
     updateExperience: async (req, res) => {
-      let experience_id = Number(req.params.id);
+      let experience_id = String(req.params.id);
       let { 
         position,
         company_name,
@@ -108,7 +105,7 @@ let experienceController = {
         });
     },
     deleteExperience: async (req, res) => {
-      let experience_id = Number(req.params.id);
+      let experience_id = String(req.params.id);
       const { rowCount } = await findExperienceById(experience_id);
       if (!rowCount) {
         return res.json({ message: "ID is not found" });

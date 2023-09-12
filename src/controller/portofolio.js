@@ -1,5 +1,6 @@
-const { selectAllPorto, selectPorto, insertPorto, updatePorto, deletePorto, countPortoData, findPorto, selectPortoWorker, findPortoById } = require('../models/portofolio')
+const { selectAllPorto, selectPorto, insertPorto, updatePorto, deletePorto, countPortoData, findPorto, selectPortoWorker, findPortoById, findUser } = require('../models/portofolio')
 const commonHelper = require("../helper/common");
+const { v4: uuidv4 } = require("uuid");
 const cloudinary = require('../middleware/cloudinary');
 
 let portoController = {
@@ -49,17 +50,13 @@ let portoController = {
     createPorto: async (req, res) => {
       let { porto_name, worker_id, link_repo } = req.body;
 
+      const porto_id = uuidv4();
+
       let porto_photo = null;
       if (req.file) {
         const result = await cloudinary.uploader.upload(req.file.path);
         porto_photo = result.secure_url;
       }
-
-      const {
-        rows: [count],
-      } = await countPortoData();
-
-      const porto_id = Number(count.count) + 1;
 
       const data = {
         porto_id,
@@ -76,7 +73,7 @@ let portoController = {
         .catch((err) => res.send(err));
     },
     updatePorto: async (req, res) => {
-      let porto_id = Number(req.params.id);
+      let porto_id = String(req.params.id);
       let { porto_name, link_repo } = req.body;
 
       const { rowCount } = await findPortoById(porto_id);
@@ -106,7 +103,7 @@ let portoController = {
         });
     },
     deletePorto: async (req, res) => {
-      let porto_id = Number(req.params.id);
+      let porto_id = String(req.params.id);
       const { rowCount } = await findPortoById(porto_id);
       if (!rowCount) {
         return res.json({ message: "ID is not found" });

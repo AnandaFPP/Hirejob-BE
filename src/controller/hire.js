@@ -71,7 +71,9 @@ let hireController = {
       worker_email,
       recruiter_compname,
     } = req.body;
+
     const hire_id = uuidv4();
+    
     const data = {
       hire_id,
       hire_title,
