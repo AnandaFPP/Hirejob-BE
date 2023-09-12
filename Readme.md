@@ -9,7 +9,7 @@
     <br />
     <a href="https://hire-job-fe-lyart.vercel.app/">View Demo</a>
     ·
-    <a href="https://hirejob-be.vercel.app/">Api Demo</a>
+    <a href="https://hirejob-be-ashy.vercel.app/">Api Demo</a>
   </p>
 </p>
 
@@ -96,7 +96,7 @@ Documentation files are provided in the [docs](./docs) folder
 
 API endpoint list are also available as published postman documentation
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/27925249/2s9Y5eLdxg)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/27920940/2s9YC32EZu)
 
 ## Related Project
 
@@ -104,6 +104,6 @@ API endpoint list are also available as published postman documentation
 
 :rocket: [`Frontend Hiring App`](https://github.com/AnandaFPP/Hirejob-FE)
 
-:rocket: [`Demo Hiring App`](https://hire-job-fe-lyart.vercel.app/)
+:rocket: [`Demo Hiring App`](https://hirejob-be-ashy.vercel.app/)
 
 Project link : [https://github.com/AnandaFPP/HireJob-BE](https://github.com/AnandaFPP/Hirejob-BE) 
