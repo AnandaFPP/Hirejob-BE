@@ -7,7 +7,7 @@
   <p align="center">
     <a href="https://github.com/AnandaFPP/Hirejob-BE"><strong>Explore the docs »</strong></a>
     <br />
-    <a href="https://hire-job-fe-lyart.vercel.app/">View Demo</a>
+    <a href="https://hirejob-fe-theta.vercel.app/">View Demo</a>
     ·
     <a href="https://hirejob-be-ashy.vercel.app/">Api Demo</a>
   </p>
@@ -104,6 +104,6 @@ API endpoint list are also available as published postman documentation
 
 :rocket: [`Frontend Hiring App`](https://github.com/AnandaFPP/Hirejob-FE)
 
-:rocket: [`Demo Hiring App`](https://hirejob-be-ashy.vercel.app/)
+:rocket: [`Demo Hiring App`](https://hirejob-fe-theta.vercel.app/)
 
 Project link : [https://github.com/AnandaFPP/HireJob-BE](https://github.com/AnandaFPP/Hirejob-BE) 
